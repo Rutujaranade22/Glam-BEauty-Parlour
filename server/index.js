@@ -1,33 +1,38 @@
+import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import express from "express";
 import mongoose from "mongoose";
+import { postSignup } from "./controllers/user.controller.js";
+
 dotenv.config();
 
 const app = express();
+
+// ✅ Middleware to parse JSON body
 app.use(cors());
-app.use(express.json());
+app.use(express.json()); // ← This must be BEFORE routes!
+
+// ✅ Test route
+app.get("/", (req, res) => {
+  res.json({ message: "Hello from server..." });
+});
+
+// ✅ Signup route
+app.post("/signup", postSignup);
 
 const PORT = process.env.PORT || 5001;
 
 const connectDB = async () => {
-    try {
-        const conn = await mongoose.connect(process.env.MONGO_URI);
-        if (conn.connection.readyState === 1) {
-            console.log("✅ MongoDB connected");
-        }
-    } catch (error) {
-        console.error("❌ MongoDB connection failed:", error.message);
-    }
+  try {
+    await mongoose.connect(process.env.MONGO_URI);
+    console.log("✅ MongoDB connected");
+  } catch (err) {
+    console.error("❌ MongoDB connection failed:", err.message);
+  }
 };
 
-app.get("/", (req, res) => {
-    res.json({ message: "Hello from server..." });
-});
-
-// Call the connectDB function BEFORE starting the server
 connectDB().then(() => {
-    app.listen(PORT, () => {
-        console.log(`🚀 Server is running on port ${PORT}`);
-    });
+  app.listen(PORT, () => {
+    console.log(`🚀 Server is running on port ${PORT}`);
+  });
 });
