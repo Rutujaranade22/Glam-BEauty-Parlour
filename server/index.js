@@ -19,7 +19,7 @@ app.get("/", (req, res) => {
 
 // ✅ Signup route
 app.post("/signup", postSignup);
-
+ 
 const PORT = process.env.PORT || 5001;
 
 const connectDB = async () => {
