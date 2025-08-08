@@ -5,14 +5,23 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import MyBookings from "./pages/MyBookings";
 import Home from "./pages/Home";
- 
+import Services from "./pages/Services";
+import PrivateRoute from "./components/PrivateRoute";
+
 function App() {
   return (
     <Router>
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/bookings" element={<MyBookings />} />
+          <Route path="/services" element={<Services />} />
+        <Route
+          path="/bookings" element={
+            <PrivateRoute>
+              <MyBookings />
+            </PrivateRoute>
+          }
+        />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
       </Routes>

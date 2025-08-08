@@ -6,7 +6,7 @@ const Services = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/services") // ✅ change if your backend port is different
+    fetch("http://localhost:5001/api/services") // ✅ change if your backend port is different
       .then((res) => res.json())
       .then((data) => {
         setServices(data.services || []);
