@@ -7,6 +7,7 @@ import MyBookings from "./pages/MyBookings";
 import Home from "./pages/Home";
 import Services from "./pages/Services";
 import PrivateRoute from "./components/PrivateRoute";
+import BookService from "./pages/BookService";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+          <Route path="/book/:id" element={<BookService />} /> 
       </Routes>
     </Router>
   );

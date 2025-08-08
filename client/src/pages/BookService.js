@@ -15,7 +15,7 @@ const BookService = () => {
     fetch(`http://localhost:5000/api/services/${id}`)
       .then((res) => res.json())
       .then((data) => {
-        setService(data.service);
+        setService(data.data); // ✅ match backend key "data"
         setLoading(false);
       })
       .catch((err) => {
@@ -49,7 +49,7 @@ const BookService = () => {
       const data = await res.json();
       if (res.ok) {
         alert("Booking successful!");
-        navigate("/my-bookings");
+        navigate("/bookings"); // ✅ correct path from App.js
       } else {
         alert(data.message || "Booking failed");
       }
