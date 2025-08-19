@@ -17,7 +17,7 @@ function Navbar() {
           <li>
             <Link
               to="/"
-              className="px-2 py-1 rounded-md hover:bg-yellow-600 hover:text-white transition"
+              className="px-2 py-1 rounded-md  hover:text-yellow-600 transition"
             >
               Home
             </Link>
@@ -25,7 +25,7 @@ function Navbar() {
           <li>
             <Link
               to="/services"
-              className="px-2 py-1 rounded-md hover:bg-yellow-600 hover:text-white transition"
+              className="px-2 py-1 rounded-md  hover:text-yellow-600 transition"
             >
               Services
             </Link>
@@ -33,7 +33,7 @@ function Navbar() {
           <li>
             <Link
               to="/about"
-              className="px-2 py-1 rounded-md hover:bg-yellow-600 hover:text-white transition"
+              className="px-2 py-1 rounded-md  hover:text-yellow-600 transition"
             >
               About
             </Link>
@@ -41,7 +41,7 @@ function Navbar() {
           <li>
             <Link
               to="/gallery"
-              className="px-2 py-1 rounded-md hover:bg-yellow-600 hover:text-white transition"
+              className="px-2 py-1 rounded-md  hover:text-yellow-600 transition"
             >
               Gallery
             </Link>
@@ -49,7 +49,7 @@ function Navbar() {
           <li>
             <Link
               to="/login"
-              className="px-2 py-1 rounded-md hover:bg-yellow-600 hover:text-white transition"
+              className="px-2 py-1 rounded-md hover:text-yellow-600 transition"
             >
               Login
             </Link>
@@ -57,7 +57,7 @@ function Navbar() {
           <li>
             <Link
               to="/signup"
-              className="px-2 py-1 rounded-md hover:bg-yellow-600 hover:text-white transition"
+              className="px-2 py-1 rounded-md  hover:text-yellow-600 transition"
             >
               Signup
             </Link>
@@ -67,15 +67,18 @@ function Navbar() {
 
       {/* Right Side Buttons */}
       <div className="flex gap-3">
-        <button className="bg-yellow-500 px-3 py-1 rounded-md hover:bg-yellow-600 transition">
+          <button className="px-3 py-1 bg-yellow-500 text-white font-semibold rounded-lg hover:bg-yellow-600 shadow-lg">
           Call Now
         </button>
         <Link
           to="/bookings"
-          className="bg-yellow-400 px-3 py-1 rounded-md hover:bg-yellow-600 transition"
-        >
+        className="px-3 py-1 bg-white text-yellow-600 font-semibold rounded-lg hover:bg-yellow-100 shadow-lg">
+        
           Book Appointment
         </Link>
+
+
+          
       </div>
     </header>
   );
