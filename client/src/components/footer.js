@@ -5,7 +5,7 @@ function Footer() {
   return (
     <footer className="relative mt-2 text-white overflow-hidden">
       {/* Gradient Background */}
-      <div className="absolute inset-0 bg-gradient-to-r from-yellow-600/90 to-orange-600/90"></div>
+      <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/90 to-yellow-600/90"></div>
 
       {/* Content */}
       <div className="relative container mx-auto px-6 md:px-16 grid grid-cols-1 md:grid-cols-3 gap-8 py-10">
