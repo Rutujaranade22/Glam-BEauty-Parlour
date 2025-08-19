@@ -1,56 +1,61 @@
 import Booking from "../models/Booking.js";
 
-const createBooking = async (req, res) => {
+// ✅ Create Booking
+export const createBooking = async (req, res) => {
   try {
-    const { service, date, time } = req.body;
+    const { serviceId, date, time } = req.body;
 
-    if (!service || !date || !time) {
+    if (!serviceId || !date || !time) {
       return res.status(400).json({ message: "All fields are required" });
     }
 
     const booking = new Booking({
-      user: req.user._id, // from middleware
-      service,
+      user: req.user._id, // from protect middleware
+      service: serviceId,
       date,
       time,
+      status: "confirmed"
     });
 
     const savedBooking = await booking.save();
-    res.status(201).json({ message: "Booking successful", data: savedBooking });
-  } catch (err) {
-    res.status(500).json({ message: "Booking failed", error: err.message });
+
+    res.status(201).json({
+      message: "Booking created successfully",
+      booking: savedBooking
+    });
+  } catch (error) {
+    res.status(500).json({ message: "Error creating booking", error: error.message });
   }
 };
 
-const getMyBookings = async (req, res) => {
+// ✅ Get all bookings for logged-in user
+export const getMyBookings = async (req, res) => {
   try {
     const bookings = await Booking.find({ user: req.user._id })
-      .populate("service", "name price duration")
+      .populate("service")
       .sort({ date: -1 });
 
-    res.status(200).json({ message: "Bookings fetched", data: bookings });
-  } catch (err) {
-    res.status(500).json({ message: "Failed to fetch bookings", error: err.message });
+    res.status(200).json({ bookings });
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching bookings", error: error.message });
   }
 };
 
-const cancelBooking = async (req, res) => {
+// ✅ Cancel booking
+export const cancelBooking = async (req, res) => {
   try {
-    const bookingId = req.params.id;
-
-    const booking = await Booking.findOne({ _id: bookingId, user: req.user._id });
+    const booking = await Booking.findOneAndUpdate(
+      { _id: req.params.id, user: req.user._id },
+      { status: "cancelled" },
+      { new: true }
+    );
 
     if (!booking) {
       return res.status(404).json({ message: "Booking not found" });
     }
 
-    booking.status = "cancelled";
-    await booking.save();
-
-    res.status(200).json({ message: "Booking cancelled", data: booking });
-  } catch (err) {
-    res.status(500).json({ message: "Cancel failed", error: err.message });
+    res.status(200).json({ message: "Booking cancelled", booking });
+  } catch (error) {
+    res.status(500).json({ message: "Error cancelling booking", error: error.message });
   }
 };
-
-export { createBooking, getMyBookings, cancelBooking };

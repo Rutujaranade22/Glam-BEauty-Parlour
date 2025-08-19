@@ -9,6 +9,7 @@ import { postSignup, postLogin } from "./controllers/user.controller.js";
 
 dotenv.config();
 
+
 const app = express(); // ✅ define app FIRST
 
 // ✅ Middleware

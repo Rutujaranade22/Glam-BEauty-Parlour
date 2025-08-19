@@ -53,12 +53,12 @@ const Services = () => {
               <p className="text-pink-600 font-bold mb-4">
                 ₹{service.price}
               </p>
-              <Link
-                to={`/book/${service._id}`}
-                className="bg-pink-500 hover:bg-pink-600 text-white px-4 py-2 rounded-lg font-medium shadow"
-              >
-                Book Now
-              </Link>
+            <Link to={`/book/${service._id}`}>
+  <button className="bg-pink-500 text-white px-4 py-2 rounded">
+    Book Now
+  </button>
+</Link>
+
             </div>
           ))}
         </div>

@@ -1,9 +1,19 @@
 import express from "express";
-import { createService, getAllServices } from "../controllers/service.controller.js";
+import {
+  createService,
+  getAllServices,
+  getServiceById,
+} from "../controllers/service.controller.js";
 
 const router = express.Router();
 
-router.post("/", createService);         // Add a new service
-router.get("/", getAllServices);         // Get all services
+// ✅ Add a new service
+router.post("/", createService);
+
+// ✅ Get all services
+router.get("/", getAllServices);
+
+// ✅ Get single service by ID (for booking page)
+router.get("/:id", getServiceById);
 
 export default router;

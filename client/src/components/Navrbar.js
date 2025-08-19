@@ -1,104 +1,84 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React from "react";
+import { Link } from "react-router-dom";
 
-const Navbar = () => {
-  const navigate = useNavigate();
-  const token = localStorage.getItem("token");
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    navigate("/login");
-  };
-
+function Navbar() {
   return (
-    <nav className="bg-pink-500 p-4 shadow-md">
-      <div className="container mx-auto flex justify-between items-center">
-        
-        {/* Logo */}
-        <Link to="/" className="text-white text-xl font-bold">
-          Glam Beauty Parlour
-        </Link>
-
-        {/* Desktop Links */}
-        <div className="hidden md:flex space-x-6">
-          <Link to="/" className="text-white hover:text-gray-200">Home</Link>
-          <Link to="/bookings" className="text-white hover:text-gray-200">My Bookings</Link>
-          {!token ? (
-            <>
-              <Link to="/login" className="text-white hover:text-gray-200">Login</Link>
-              <Link to="/signup" className="text-white hover:text-gray-200">Signup</Link>
-            </>
-          ) : (
-            <button
-              onClick={handleLogout}
-              className="bg-white text-pink-500 px-3 py-1 rounded hover:bg-gray-200"
-            >
-              Logout
-            </button>
-          )}
-        </div>
-
-        {/* Mobile Menu Button */}
-        <div className="md:hidden">
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="text-white text-2xl"
-          >
-            ☰
-          </button>
-        </div>
+    <header className="relative z-20 flex justify-between items-center px-6 md:px-16 py-4 bg-white/90 shadow-md">
+      {/* Logo */}
+      <div className="flex items-center gap-2">
+        <span className="text-yellow-500 text-2xl font-bold">✦</span>
+        <h1 className="font-bold text-xl">Glam Beauty</h1>
+        <span className="text-sm text-gray-500">Premium Parlour</span>
       </div>
 
-      {/* Mobile Menu */}
-      {isMenuOpen && (
-        <div className="md:hidden mt-2 bg-pink-400 p-4 space-y-2 rounded">
-          <Link
-            to="/"
-            className="block text-white"
-            onClick={() => setIsMenuOpen(false)}
-          >
-            Home
-          </Link>
-          <Link
-            to="/bookings"
-            className="block text-white"
-            onClick={() => setIsMenuOpen(false)}
-          >
-            My Bookings
-          </Link>
-          {!token ? (
-            <>
-              <Link
-                to="/login"
-                className="block text-white"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Login
-              </Link>
-              <Link
-                to="/signup"
-                className="block text-white"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Signup
-              </Link>
-            </>
-          ) : (
-            <button
-              onClick={() => {
-                handleLogout();
-                setIsMenuOpen(false);
-              }}
-              className="w-full text-left text-white"
+      {/* Center Nav Links */}
+      <nav className="flex-1 flex justify-center">
+        <ul className="flex space-x-6 font-medium text-gray-700">
+          <li>
+            <Link
+              to="/"
+              className="px-2 py-1 rounded-md hover:bg-yellow-600 hover:text-white transition"
             >
-              Logout
-            </button>
-          )}
-        </div>
-      )}
-    </nav>
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/services"
+              className="px-2 py-1 rounded-md hover:bg-yellow-600 hover:text-white transition"
+            >
+              Services
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/about"
+              className="px-2 py-1 rounded-md hover:bg-yellow-600 hover:text-white transition"
+            >
+              About
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/gallery"
+              className="px-2 py-1 rounded-md hover:bg-yellow-600 hover:text-white transition"
+            >
+              Gallery
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/login"
+              className="px-2 py-1 rounded-md hover:bg-yellow-600 hover:text-white transition"
+            >
+              Login
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/signup"
+              className="px-2 py-1 rounded-md hover:bg-yellow-600 hover:text-white transition"
+            >
+              Signup
+            </Link>
+          </li>
+        </ul>
+      </nav>
+
+      {/* Right Side Buttons */}
+      <div className="flex gap-3">
+        <button className="bg-yellow-500 px-3 py-1 rounded-md hover:bg-yellow-600 transition">
+          Call Now
+        </button>
+        <Link
+          to="/bookings"
+          className="bg-yellow-400 px-3 py-1 rounded-md hover:bg-yellow-600 transition"
+        >
+          Book Appointment
+        </Link>
+      </div>
+    </header>
   );
-};
+}
 
 export default Navbar;

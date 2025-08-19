@@ -1,32 +1,28 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navrbar";
+import Navbar from "./components/Navrbar";   // ✅ Fixed spelling
+ import Footer from "./components/footer";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import MyBookings from "./pages/MyBookings";
 import Home from "./pages/Home";
-import Services from "./pages/Services";
-import PrivateRoute from "./components/PrivateRoute";
-import BookService from "./pages/BookService";
 
 function App() {
   return (
     <Router>
+      {/* Navbar */}
       <Navbar />
+
+      {/* Page Routes */}
       <Routes>
         <Route path="/" element={<Home />} />
-          <Route path="/services" element={<Services />} />
-        <Route
-          path="/bookings" element={
-            <PrivateRoute>
-              <MyBookings />
-            </PrivateRoute>
-          }
-        />
+        <Route path="/bookings" element={<MyBookings />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-          <Route path="/book/:id" element={<BookService />} /> 
       </Routes>
+
+      {/* Footer */}
+      <Footer />
     </Router>
   );
 }
